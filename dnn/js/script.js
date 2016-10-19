@@ -1,8 +1,8 @@
-	// create the module and name it scotchApp
-	var scotchApp = angular.module('scotchApp', ['ngRoute']);
+	// create the module and name it dnnApp
+	var dnnApp = angular.module('dnnApp', ['ngRoute']);
 
 	// configure our routes
-	scotchApp.config(function($routeProvider) {
+	dnnApp.config(function($routeProvider) {
 		$routeProvider
 
 			// route for the home page
@@ -25,15 +25,15 @@
 	});
 
 	// create the controller and inject Angular's $scope
-	scotchApp.controller('mainController', function($scope) {
+	dnnApp.controller('mainController', function($scope) {
 		// create a message to display in our view
 		$scope.message = 'Everyone come and see how good I look!';
 	});
 
-	scotchApp.controller('aboutController', function($scope) {
+	dnnApp.controller('aboutController', function($scope) {
 		$scope.message = 'Look! I am an about page.';
 	});
 
-	scotchApp.controller('contactController', function($scope) {
+	dnnApp.controller('contactController', function($scope) {
 		$scope.message = 'Contact us! JK. This is just a demo.';
 	});
