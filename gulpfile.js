@@ -1,5 +1,6 @@
 var gulp = require('gulp');
-var browserify = require('gulp-browserify');
+// var browserify = require('gulp-browserify');
+var uglify = require('gulp-uglify');
 var concat = require('gulp-concat');
 var less = require('gulp-less');
 var refresh = require('gulp-livereload');
@@ -10,11 +11,13 @@ var embedlr = require('gulp-embedlr');
 var browserSync = require('browser-sync').create();
 
 gulp.task('scripts', function() {
-    gulp.src(['dnn/js/*.js'])
-        .pipe(browserify())
+    gulp.src(['./dnn/js/script.js', 'dnn/js/*.js'])
+        // .pipe(browserify())
+        .pipe(uglify({ mangle: false }))
         .pipe(concat('script.js'))
         .pipe(gulp.dest('dist/js'))
         .pipe(refresh(server))
+        .pipe(browserSync.stream({match: '**/*.js'}))
 })
 
 gulp.task('styles', function() {
