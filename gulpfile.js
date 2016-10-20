@@ -23,10 +23,12 @@ gulp.task('styles', function() {
         .pipe(minifyCSS())
         .pipe(gulp.dest('dist/css'))
         .pipe(refresh(server))
+        .pipe(browserSync.stream({match: '**/*.css'}))
 })
 
 gulp.task('browser-sync', function() {
     browserSync.init({
+        injectChanges: true,
         server: {
             baseDir: "./dist"
         }
@@ -54,7 +56,7 @@ gulp.task('html', function() {
 gulp.task('default', function() {
     gulp.run('lr-server', 'scripts', 'styles', 'html', 'browser-sync');
 
-    gulp.watch('dnn/src/**', function(event) {
+    gulp.watch('dnn/js/**', function(event) {
         gulp.run('scripts');
     })
 
