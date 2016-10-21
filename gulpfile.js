@@ -1,5 +1,6 @@
 var gulp = require('gulp');
 // var browserify = require('gulp-browserify');
+var sourcemaps = require('gulp-sourcemaps');
 var uglify = require('gulp-uglify');
 var concat = require('gulp-concat');
 var less = require('gulp-less');
@@ -11,10 +12,11 @@ var embedlr = require('gulp-embedlr');
 var browserSync = require('browser-sync').create();
 
 gulp.task('scripts', function() {
-    gulp.src(['./dnn/js/script.js', 'dnn/js/*.js'])
-        // .pipe(browserify())
+    gulp.src(['./dnn/js/script.js', /*'dnn/js/*Service.js', */ 'dnn/js/*Controller.js'])
+        .pipe(sourcemaps.init())
         .pipe(uglify({ mangle: false }))
         .pipe(concat('script.js'))
+        .pipe(sourcemaps.write('maps'))
         .pipe(gulp.dest('dist/js'))
         .pipe(refresh(server))
         .pipe(browserSync.stream({match: '**/*.js'}))
@@ -57,6 +59,7 @@ gulp.task('html', function() {
 })
 
 gulp.task('default', function() {
+    
     gulp.run('lr-server', 'scripts', 'styles', 'html', 'browser-sync');
 
     gulp.watch('dnn/js/**', function(event) {
