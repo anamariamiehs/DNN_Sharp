@@ -1,7 +1,21 @@
-<div class="jumbotron text-center">
-<h1>{{event.model.timestamp}}</h1>
-<h2>{{event.model.title}}</h2>
-<p>{{event.model.content}}</p>
+<div class="jumbotron text-center" data-ng-controller="eventController">
+<h1>{{event.timestamp}}</h1>
+<h2>{{event.title}}</h2>
+<p>{{event.content}}</p>
 
 	<p>{{ message }}</p>
+
+	<form data-ng-submit="addEvent()" class="event-form">
+
+	<div class="form-group">
+		<label for="title">Add a new event</label>
+		<input type="text" class="form-control" data-ng-model="title" placeholder="Event name" />
+	</div>
+	<div class="form-group">
+		<label for="title">Describe your event</label>
+		<input type="text" class="form-control" data-ng-model="text" placeholder="Event description" />
+	</div>
+		<input type="submit" class="btn btn-default" value="Save" />
+	</form>
+
 </div>

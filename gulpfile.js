@@ -50,12 +50,14 @@ gulp.task('html', function() {
     gulp.src("dnn/index.html")
         .pipe(embedlr())
         .pipe(gulp.dest('dist'))
-        .pipe(refresh(server));
+        .pipe(refresh(server))
+        .pipe(browserSync.stream({match: '**/index.html'}));
 
     gulp.src("dnn/pages/*.html")
         .pipe(embedlr())
         .pipe(gulp.dest('dist/pages'))
-        .pipe(refresh(server));
+        .pipe(refresh(server))
+        .pipe(browserSync.stream({match: '**/*.html'}));
 })
 
 gulp.task('default', function() {

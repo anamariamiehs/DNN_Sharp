@@ -2,7 +2,7 @@
   "name": "DNN_Sharp",
   "version": "1.0.0",
   "description": "cube demo",
-  "license": "GNU",
+  "license": "MIT",
   "repository": {
     "type": "git",
     "url": "git://github.com/anamariamiehs/DNN_Sharp.git"
@@ -17,6 +17,8 @@
     "gulp-livereload": "^3.8.1",
     "gulp-minify-css": "^1.2.4",
     "gulp-refresh": "^1.1.0",
+    "gulp-sourcemaps": "^2.1.1",
+    "gulp-uglify": "^2.0.0",
     "tiny-lr": "^1.0.2"
   }
 }
