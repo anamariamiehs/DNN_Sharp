@@ -9,7 +9,8 @@ dnnApp.controller('eventController', function($scope) {
     $scope.events.push({
       timestamp: $scope.setTimestamp,
       title: $scope.eventTitle,
-      text: $scope.eventText
+      text: $scope.eventText,
+      datetime: $scope.setDateTime
     });
 
     //reset the inputs after creating
@@ -21,6 +22,7 @@ dnnApp.controller('eventController', function($scope) {
     console.log($scope.events)
     
   };
+//https://attach2process.wordpress.com/2015/05/04/angular-js-communication-between-modules-with-rootscope-broadcast-and-on/
 
   // $scope.readEvents = function() {
   //   $scope.events = localStorage.getItem('events');
@@ -53,28 +55,40 @@ dnnApp.controller('eventController', function($scope) {
     return now;
   };
 
-  $scope.getTimestamp = function(timestampString) {
-    var timestamp = moment.unix(parseInt(timestampString));
-    console.log( moment().timestamp.format() );
-    return timestamp;
+  $scope.setDateTime = function(){
+
   }
 
+  $scope.getCalendarDate = function() {
 
-  $scope.remaining = function() {
-    var count = 0;
-    angular.forEach($scope.events, function(event) {
-      count += event.done ? 0 : 1;
-    });
-    return count;
-  };
+  }
 
-  $scope.archive = function() {
-    var oldEvents = $scope.events;
-    $scope.events = [];
-    angular.forEach(oldEvents, function(event) {
-      if (!event.done)
-        $scope.events.push(event);
-    });
-    localStorage.setItem('events', JSON.stringify($scope.events));
-  };
+  $scope.getClockTime = function() {
+    
+  }
+
+  // $scope.getTimestamp = function(timestampString) {
+  //   var timestamp = moment.unix(parseInt(timestampString));
+  //   console.log( moment().timestamp.format() );
+  //   return timestamp;
+  // }
+
+
+  // $scope.remaining = function() {
+  //   var count = 0;
+  //   angular.forEach($scope.events, function(event) {
+  //     count += event.done ? 0 : 1;
+  //   });
+  //   return count;
+  // };
+
+  // $scope.archive = function() {
+  //   var oldEvents = $scope.events;
+  //   $scope.events = [];
+  //   angular.forEach(oldEvents, function(event) {
+  //     if (!event.done)
+  //       $scope.events.push(event);
+  //   });
+  //   localStorage.setItem('events', JSON.stringify($scope.events));
+  // };
 });
