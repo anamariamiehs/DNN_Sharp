@@ -4,13 +4,12 @@
 
 dnnApp.controller('eventController', function($scope) {
   $scope.saved = localStorage.getItem('events');
-  $scope.date = Math.round(new Date().getTime()/1000);//avoid milliseconds
   $scope.events = (localStorage.getItem('events') !== null) ? JSON.parse($scope.saved) : [];
   localStorage.setItem('events', JSON.stringify($scope.events));
 
   $scope.addEvent = function() {
     $scope.events.push({
-      timestamp: $scope.date,
+      timestamp: $scope.setTimestamp,
       title: $scope.eventTitle,
       text: $scope.eventText
     });
@@ -24,6 +23,13 @@ dnnApp.controller('eventController', function($scope) {
     console.log($scope.events)
     
   };
+
+  $scope.setTimestamp = function() {
+    var now = new Date();
+    console.log(now)
+    return now;
+  };
+
 
   $scope.remaining = function() {
     var count = 0;
@@ -43,7 +49,3 @@ dnnApp.controller('eventController', function($scope) {
     localStorage.setItem('events', JSON.stringify($scope.events));
   };
 });
-
-// function eventController($scope) {
-
-// }

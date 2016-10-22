@@ -1,26 +1,13 @@
-	// create the module and name it dnnApp
-	var dnnApp = angular.module('dnnApp', ['ngRoute']);
+// var XCalendar;
+// (function(){
+// 	 callCalendar('calendar');
+// })();
 
-	// configure our routes
-	dnnApp.config(function($routeProvider) {
-		$routeProvider
+// function callCalendar(idString){
+// 			var calElem = document.getElementById(idString);
+// 			if (calElem.length){
+// 				if(XCalendar == undefined) XCalendar = new dhtmlXCalendarObject([idString]);
 
-			// route for the home page
-			.when('/', {
-				templateUrl : 'pages/home.html',
-				controller  : 'mainController'
-			})
-
-			// route for the about page
-			.when('/about', {
-				templateUrl : 'pages/about.html',
-				controller  : 'aboutController'
-			})
-
-			// route for the event page
-			.when('/event', {
-				templateUrl : 'pages/event.html',
-				controller  : 'eventController'
-			})
-
-	});
+// 				XCalendar.show();
+// 			}
+// }

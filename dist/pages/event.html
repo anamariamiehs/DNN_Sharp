@@ -15,7 +15,20 @@
 		<label for="title">Describe your event</label>
 		<input type="text" class="form-control" data-ng-model="text" placeholder="Event description" />
 	</div>
+	<div class="form-group">
+		<label for="title">When will you go?</label>
+		<div class="calendar-container">
+		<datepicker class="calendar">
+			<input class="form-control" ng-model="date" type="text"/>
+		</datepicker>
+	</div>
+	</div>
 		<input type="submit" class="btn btn-default" value="Save" />
 	</form>
+
+	<clockpicker ng-model="time">
+</clockpicker>
+	
+	
 
 </div>
