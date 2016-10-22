@@ -9,14 +9,17 @@ var server = lr();
 var minifyCSS = require('gulp-minify-css');
 var embedlr = require('gulp-embedlr');
 var browserSync = require('browser-sync').create();
+
 var autoRestart = require('gulp-auto-restart');
 autoRestart({'task': 'watch'});
+var moment = require('moment');
+moment().format();
 
 var resCss = [
-        'dnn/css/bootstrap.min.css',
-        'dnn/css/font-awesome.css',
-        'dnn/css/angular-datepicker.css',
-        'dnn/css/angular-clockpicker.less'
+        'dnn/css/res/bootstrap.css',
+        'dnn/css/res/font-awesome.css',
+        'dnn/css/res/angular-datepicker.css',
+        'dnn/css/res/angular-clockpicker.css'
         ]
 
 var resJs = [

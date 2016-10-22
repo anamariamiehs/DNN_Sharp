@@ -1,34 +1,38 @@
 <div class="jumbotron text-center" data-ng-controller="eventController">
-<h1>{{event.timestamp}}</h1>
-<h2>{{event.title}}</h2>
-<p>{{event.content}}</p>
 
-	<p>{{ message }}</p>
-
-	<form data-ng-submit="addEvent()" class="event-form">
+	<form data-ng-submit="createEvent()" class="event-form">
 
 	<div class="form-group">
 		<label for="title">Add a new event</label>
 		<input type="text" class="form-control" data-ng-model="title" placeholder="Event name" />
 	</div>
 	<div class="form-group">
-		<label for="title">Describe your event</label>
+		<label for="title">Describe the event</label>
 		<input type="text" class="form-control" data-ng-model="text" placeholder="Event description" />
 	</div>
 	<div class="form-group">
-		<label for="title">When will you go?</label>
+		<label for="title">On what day will it start?</label>
 		<div class="calendar-container">
 		<datepicker class="calendar">
 			<input class="form-control" ng-model="date" type="text"/>
 		</datepicker>
 	</div>
 	</div>
+	<div class="form-group">
+		<label for="title">At what time?</label>
+		<clockpicker ng-model="time"></clockpicker>
+	</div>
 		<input type="submit" class="btn btn-default" value="Save" />
 	</form>
 
-	<clockpicker ng-model="time">
-</clockpicker>
-	
-	
-
+	<section class="cube-container">
+	<div id="cube" class="cube">
+		<figure class="front">1</figure>
+		<figure class="back">2</figure>
+		<figure class="right">3</figure>
+		<figure class="left">4</figure>
+		<figure class="top">5</figure>
+		<figure class="bottom">6</figure>
+	</div>
+	</section>
 </div>

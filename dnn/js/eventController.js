@@ -1,20 +1,18 @@
-// function eventController($scope, eventService) {
-//     $scope.event = eventService;
-// }
-
 dnnApp.controller('eventController', function($scope) {
+  $scope.time = new Date();
   $scope.saved = localStorage.getItem('events');
   $scope.events = (localStorage.getItem('events') !== null) ? JSON.parse($scope.saved) : [];
   localStorage.setItem('events', JSON.stringify($scope.events));
+  $scope.datetime = null;
 
-  $scope.addEvent = function() {
+  $scope.createEvent = function() {
     $scope.events.push({
       timestamp: $scope.setTimestamp,
       title: $scope.eventTitle,
       text: $scope.eventText
     });
 
-    //reset the inputs after adding
+    //reset the inputs after creating
     $scope.date = null;
     $scope.eventTitle = '';
     $scope.eventText = ''; 
@@ -24,11 +22,42 @@ dnnApp.controller('eventController', function($scope) {
     
   };
 
+  // $scope.readEvents = function() {
+  //   $scope.events = localStorage.getItem('events');
+  // }
+
+  // $scope.updateEvent = function() {
+  //   //TODO
+  // }
+
+  $scope.deleteEvent = function(event) {
+    var len = $scope.events.length;
+      while (len--) {
+       if( $scope.events[len] === event){
+         $scope.events.splice(len, 0);
+          localStorage.setItem('events', JSON.stringify($scope.events));
+          return;
+       }
+    }
+  }
+
+  $scope.deleteEvents = function() {
+    $scope.events = [];
+    localStorage.setItem('events', JSON.stringify($scope.events));
+  }
+
   $scope.setTimestamp = function() {
-    var now = new Date();
+    // var now = String(Math.round(new Date().getTime()/1000.0));
+    var now = moment().unix();
     console.log(now)
     return now;
   };
+
+  $scope.getTimestamp = function(timestampString) {
+    var timestamp = moment.unix(parseInt(timestampString));
+    console.log( moment().timestamp.format() );
+    return timestamp;
+  }
 
 
   $scope.remaining = function() {
