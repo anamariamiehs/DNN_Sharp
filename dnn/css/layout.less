@@ -1,4 +1,18 @@
 body {
     background:#000;
-    font-family: Helvetica, Arial, sans-serif;
+    font-family:@font-name, @font-fallback;
 }
+
+.event-section {
+    .center-block();
+    max-width: 320px;
+}
+
+.ui-clockpicker {
+    margin:auto;
+}
+
+.form-control {
+    color:@color-primary;
+    .box-shadow(0 1px 4px rgba(0,0,0,0,3));
+    }
