@@ -4,14 +4,9 @@
 	// configure our routes
 	dnnApp.config(function($routeProvider) {
 		$routeProvider
-			// route for the home page
-			.when('/', {
-				templateUrl : 'pages/home.html',
-				controller  : 'mainController'
-			})
 
 			// route for the event page
-			.when('/event', {
+			.when('/', {
 				templateUrl : 'pages/event.html',
 				controller  : 'eventController'
 			})

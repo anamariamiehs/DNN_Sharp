@@ -1,4 +1,5 @@
 .ui-clockpicker {
+	.noselect();
 	border: none;
 	background:@clock-bg-color;
 	font-family: @font-name, @font-fallback;
@@ -15,17 +16,27 @@
 	box-shadow: @clock-shadow;
 }
 .ui-clockpicker-selector {
+	&.minute {
+		>ol>li{
+			margin: -3px 0 0 -7px;
+		}
+	}
 	background: darken(@clock-bg-color, 5%);
-	li {
+	&>ol>li {
 		color: lighten(@clock-bg-color, 20%);
 		font-weight: bold;
+		font-size:16px;
+		width: 36px;
+		height: 36px;
+		text-align: center;
+		margin: 0px 0 0 -11px;
 	}
 }
 .ui-clockpicker-line {
 	background: @clock-color;
 	width: 10px;
     border-radius: 10px;
-    box-shadow: @clock-shadow;
+    box-shadow: -4px 0 40px rgba(0,0,0,0.2);
 }
 .ui-clockpicker-time {
 	background: lighten(@clock-bg-color, 50%);
