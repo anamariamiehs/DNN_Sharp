@@ -21,7 +21,8 @@
 			// route for the event page
 			.when('/event', {
 				templateUrl : 'pages/event.html',
-				controller  : 'eventController'
+				controller  : 'eventController',
+				service  : 'eventService'
 			})
 
 	});
