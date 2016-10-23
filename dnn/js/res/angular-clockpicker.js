@@ -1,5 +1,5 @@
 angular.module("ui.clockpicker", [])
-	.controller("ClockPickerTestController", function () {
+	.controller("ClockPickerController", function () {
 		this.time = new Date();
 	})
 	.directive("clockpicker", function () {

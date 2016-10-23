@@ -1,35 +1,42 @@
 dnnApp.controller('eventController', function($scope) {
-  $scope.events = $scope.readEvents;
-  localStorage.setItem('events', JSON.stringify($scope.events));
-  $scope.dateTime = null;
-  $scope.date = moment();
-  $scope.time = moment();
 
-/*!
- * Event functions
- */
-  $scope.readEvents = function() {
-    (localStorage.getItem('events') !== null) ? JSON.parse($scope.events) : [];
-    console.log(events)
+  $scope.event = null;
+  $scope.timestamp = null;
+  $scope.eventTitle = '';
+  $scope.eventText = ''; 
+  $scope.eventDateTime = null;
+  $scope.date = moment();
+  $scope.time = new Date();
+
+  $scope.events = (localStorage.getItem('events') !== null) ? JSON.parse($scope.events) : [ {timestamp: null,title: '',text: '',datetime: null} ];
+  localStorage.setItem('events', JSON.stringify($scope.events));
+  //  deleteEvents:
+  //   $scope.events = [];
+  //   localStorage.setItem('events', JSON.stringify($scope.events));
+    
+  $scope.resetEvent = function() {
+    $scope.timestamp = null;
+    $scope.event = null;
+    $scope.eventTitle = '';
+    $scope.eventText = ''; 
+    $scope.eventDateTime = null;
+    $scope.date = moment();
+    $scope.time = new Date();
   }
 
   $scope.createEvent = function() {
+    $scope.eventDateTime = $scope.setEventDateTime($scope.date, $scope.time);
     $scope.events.push({
-      timestamp: $scope.setTimestamp,
-      title: $scope.getEventTitle,
-      text: $scope.getEventText,
-      dateTime: $scope.setDateTime($scope.date, $scope.time)
-    });
-    //reset the inputs after creating
-    $scope.dateTime = null;
-    $scope.eventTitle = '';
-    $scope.eventText = ''; 
-
-    localStorage.setItem('events', JSON.stringify($scope.events));
-    console.log($scope.events)
+			timestamp: $scope.setTimestamp(),
+      title: $scope.eventTitle,
+      text: $scope.eventText,
+      datetime: $scope.eventDateTime
+		});
     
+    $scope.resetEvent();
+    localStorage.setItem('events', JSON.stringify($scope.events));
   }
-  //TODO: updateEvent
+
   $scope.deleteEvent = function(event) {
     var len = $scope.events.length;
       while (len--) {
@@ -41,47 +48,27 @@ dnnApp.controller('eventController', function($scope) {
     }
   }
 
-  $scope.deleteEvents = function() {
-    $scope.events = [];
-    localStorage.setItem('events', JSON.stringify($scope.events));
-  }
-
-/*!
- * Event Data functions
- */
   $scope.setTimestamp = function() {
     return moment().unix();
   };
 
-  $scope.getEventTitle = function() {
+  $scope.setEventDateTime = function(date, time){
+    var dt;
+    (typeof date === 'string') ? dt = moment(date,"ddd MMM Do yyyy HH:mm:ss ZZ") : date;
+    if (typeof time !== 'Moment') {
+      var t = time.getTime();
+       time = undefined;
+       time = moment(t);
+    }
+    //"Wed Oct 19 2016 00:00:00 GMT+0300 (GTB Daylight Time)"
+    var h = time.hours();
+    var m = time.minutes();
+    dt.hours(h);
+    dt.minutes(m);
+    dt.seconds(0);
+    $scope.eventDateTime = dt;
 
-  }
-  $scope.getEventText = function() {
-
-  }
-
-  $scope.setDateTime = function(date, time){
-    var dateTime = moment(date);
-    time = moment(time);
-    dateTime.hours(time.hours())
-    dateTime.minutes(time.minutes())
-    dateTime.seconds(time.seconds())
-    return dateTime;
-  }
-
-//https://attach2process.wordpress.com/2015/05/04/angular-js-communication-between-modules-with-rootscope-broadcast-and-on/
-
-  $scope.getCalendarDate = function() {
-
+    return $scope.eventDateTime;
   }
 
-  $scope.getClockTime = function() {
-    
-  }
-
-  // $scope.getTimestamp = function(timestampString) {
-  //   var timestamp = moment.unix(parseInt(timestampString));
-  //   console.log( moment().timestamp.format() );
-  //   return timestamp;
-  // }
 });

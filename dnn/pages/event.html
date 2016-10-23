@@ -14,11 +14,11 @@
 		<label for="title">On what day will it start?</label>
 		<div class="calendar-container">
 		<datepicker class="calendar">
-			<input class="form-control" ng-model="date" type="text"/>
+			<input class="form-control" ng-model="date"/>
 		</datepicker>
 	</div>
 	</div>
-	<div class="form-group">
+	<div class="form-group" ng-controller="ClockPickerController">
 		<label for="title">At what time?</label>
 		<clockpicker ng-model="time"></clockpicker>
 	</div>

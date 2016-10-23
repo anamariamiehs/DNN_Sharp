@@ -1,6 +1,5 @@
 	// create the module and name it dnnApp
-	
-	var dnnApp = angular.module('dnnApp', ['ngRoute', '720kb.datepicker', 'ui.clockpicker']);
+	var dnnApp = angular.module('dnnApp', ['ngRoute', 'ui.clockpicker', '720kb.datepicker']);
 
 	// configure our routes
 	dnnApp.config(function($routeProvider) {
@@ -21,8 +20,7 @@
 			// route for the event page
 			.when('/event', {
 				templateUrl : 'pages/event.html',
-				controller  : 'eventController',
-				service  : 'eventService'
+				controller  : 'eventController'
 			})
 
 	});
