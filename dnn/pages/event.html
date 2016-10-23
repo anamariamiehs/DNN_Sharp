@@ -25,12 +25,12 @@
 			<input type="submit" class="btn btn-default" value="Save" />
 		</form>
 
-		<ul>
+		<ul class="event-output">
 			<li data-ng-repeat="event in events track by $index">
-				<span>{{ event.title }}</span>
-				<span>{{ event.text }}</span>
-				<span>{{ event.date }}</span>
-				<span>{{ event.time }}</span>
+				<span class="event-title">{{ event.title }}</span>
+				<span class="event-text">{{ event.text }}</span>
+				<span class="event-date">{{ event.date }}</span>
+				<span class="event-time">{{ event.time }}</span>
 			</li>
 		</ul>
 
