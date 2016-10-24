@@ -1,0 +1,141 @@
+.ui-clockpicker {
+	.noselect();
+	border: none;
+	background:@clock-bg-color;
+	font-family: @font-name, @font-fallback;
+	color: @clock-color;
+	.selected {
+		color:@clock-color;
+	}
+	a {
+		cursor: pointer;
+	}
+}
+.ui-clockpicker-selection {
+	color: @clock-color;
+	box-shadow: @clock-shadow;
+}
+.ui-clockpicker-selector {
+	&.minute {
+		>ol>li{
+			margin: -3px 0 0 -7px;
+		}
+	}
+	background: darken(@clock-bg-color, 5%);
+	&>ol>li {
+		color: lighten(@clock-bg-color, 20%);
+		font-weight: bold;
+		font-size:16px;
+		width: 36px;
+		height: 36px;
+		text-align: center;
+		margin: 0px 0 0 -11px;
+	}
+}
+.ui-clockpicker-line {
+	background: @clock-color;
+	width: 10px;
+    border-radius: 10px;
+    box-shadow: -4px 0 40px rgba(0,0,0,0.2);
+}
+.ui-clockpicker-time {
+	background: lighten(@clock-bg-color, 50%);
+	box-shadow: @clock-shadow;
+	li {
+		font-size: x-large;
+		position: absolute;
+		&:nth-child(1) {
+			left: 75px;
+			top: 0;
+		}
+		&:nth-child(2) {
+			left: 118px;
+			top: 16px;
+		}
+		&:nth-child(3) {
+			left: 149px;
+			top: 40px;
+		}
+		&:nth-child(4) {
+			left: 160px;
+			top: 76px;
+		}
+		&:nth-child(5) {
+			left: 144px;
+			top: 112px;
+		}
+		&:nth-child(6) {
+			left: 118px;
+			top: 138px;
+		}
+		&:nth-child(7) {
+			left: 82px;
+			top: 150px;
+		}
+		&:nth-child(8) {
+			left: 45px;
+			top: 138px;
+		}
+		&:nth-child(9) {
+			left: 15px;
+			top: 112px;
+		}
+		&:nth-child(10) {
+			left: 5px;
+			top: 76px;
+		}
+		&:nth-child(11) {
+			left: 13px;
+			top: 40px;
+		}
+		&:nth-child(12) {
+			left: 39px;
+			top: 16px;
+		}
+	}
+}
+.ui-clockpicker-selector.minute {
+	ol.ui-clockpicker-time {
+		li {
+			&:nth-child(2) {
+				left: 113px;
+			}
+			&:nth-child(3) {
+				left: 137px;
+			}
+			&:nth-child(4) {
+				left: 145px;
+			}
+			&:nth-child(5) {
+				left: 137px;
+			}
+			&:nth-child(6) {
+				left: 109px;
+			}
+			&:nth-child(7) {
+				left: 75px;
+			}
+			&:nth-child(8) {
+				left: 41px;
+			}
+		}
+	}
+}
+.ui-clockpicker-period {
+	height: 15px;
+	list-style: none;
+	margin: 0;
+	padding: 0;
+	position: relative;
+	top: -5px;
+	li {
+		font-weight: bold;
+		position: absolute;
+		&:nth-child(1) {
+			left: 0;
+		}
+		&:nth-child(2) {
+			right: 0;
+		}
+	}
+}

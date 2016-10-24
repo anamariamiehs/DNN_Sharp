@@ -1,5 +1,4 @@
 var gulp = require('gulp');
-// var browserify = require('gulp-browserify');
 var sourcemaps = require('gulp-sourcemaps');
 var uglify = require('gulp-uglify');
 var concat = require('gulp-concat');
@@ -11,8 +10,42 @@ var minifyCSS = require('gulp-minify-css');
 var embedlr = require('gulp-embedlr');
 var browserSync = require('browser-sync').create();
 
+var autoRestart = require('gulp-auto-restart');
+autoRestart({'task': 'watch'});
+var moment = require('moment');
+moment().format();
+
+var resCss = [
+        'dnn/css/res/bootstrap.css',
+        'dnn/css/res/font-awesome.css',
+        'dnn/css/res/angular-datepicker.css',
+        'dnn/css/res/angular-clockpicker.css'
+        ]
+
+var resJs = [
+        './dnn/js/res/angular.js',
+        './dnn/js/res/angular-route.js',
+        './dnn/js/res/angular-datepicker.js',
+        './dnn/js/res/angular-clockpicker.js',
+        './dnn/js/res/moment.js'
+        ]
+
+var js = [
+        './dnn/js/app.js',
+        './dnn/js/*Controller.js',
+        './dnn/js/script.js'
+        ]
+
+
 gulp.task('scripts', function() {
-    gulp.src(['./dnn/js/script.js', /*'dnn/js/*Service.js', */ 'dnn/js/*Controller.js'])
+  gulp.src(resJs)
+        .pipe(sourcemaps.init())
+        .pipe(uglify({ mangle: false }))
+        .pipe(concat('resources.js'))
+        .pipe(sourcemaps.write('maps'))
+        .pipe(gulp.dest('dist/js'));
+
+    gulp.src(js)
         .pipe(sourcemaps.init())
         .pipe(uglify({ mangle: false }))
         .pipe(concat('script.js'))
@@ -22,13 +55,26 @@ gulp.task('scripts', function() {
         .pipe(browserSync.stream({match: '**/*.js'}))
 })
 
+
 gulp.task('styles', function() {
+    gulp.src(resCss)
+        .pipe(sourcemaps.init())
+        .pipe(minifyCSS())
+        .pipe(concat('resources.css'))
+        .pipe(sourcemaps.write('maps'))
+        .pipe(gulp.dest('dist/css'));
+
     gulp.src(['dnn/css/style.less'])
         .pipe(less())
         .pipe(minifyCSS())
         .pipe(gulp.dest('dist/css'))
         .pipe(refresh(server))
         .pipe(browserSync.stream({match: '**/*.css'}))
+})
+
+gulp.task('fonts', function() {
+  gulp.src('dnn/fonts/**.*')
+        .pipe(gulp.dest('dist/fonts'));
 })
 
 gulp.task('browser-sync', function() {
@@ -60,9 +106,9 @@ gulp.task('html', function() {
         .pipe(browserSync.stream({match: '**/*.html'}));
 })
 
-gulp.task('default', function() {
+gulp.task('serve', function() {
     
-    gulp.run('lr-server', 'scripts', 'styles', 'html', 'browser-sync');
+    gulp.run('lr-server', 'fonts', 'scripts', 'styles', 'html', 'browser-sync');
 
     gulp.watch('dnn/js/**', function(event) {
         gulp.run('scripts');

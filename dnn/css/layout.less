@@ -1,4 +1,48 @@
 body {
     background:#000;
-    font-family: Helvetica, Arial, sans-serif;
+    font-family:@font-name, @font-fallback;
+}
+
+.event-section {
+    .center-block();
+    max-width: 320px;
+}
+
+.ui-clockpicker {
+    margin:auto;
+}
+
+.form-control {
+color:@color-primary;
+.box-shadow(0 1px 4px rgba(0,0,0,0,3));
+}
+
+ul.event-output {
+    list-style: none;
+    padding: 0;
+    margin-top:@dimen;
+    li {
+        display: block;
+        padding: 4px;
+        margin: @dimen 4px;
+        border-radius: 2px;
+        border: 1px dashed lighten(@color-primary, 40%);
+        box-shadow: 0 0 0 4px #fff, @clock-shadow;
+        background: #fff;
+
+        .event-title {
+            font-weight: bold;
+        }
+        .event-text {
+            
+        }
+
+        .event-date {
+            font-weight: bold;
+        }
+
+        .event-time {
+            
+        }
+    }
 }
