@@ -1,14 +1,14 @@
-<div class="jumbotron text-center" data-ng-controller="eventController">
+<div class="jumbotron text-center" data-ng-controller="appointmentController">
 	<div class="event-section">
-		<form data-ng-submit="createEvent()" class="event-form">
+		<form data-ng-submit="createAppointment()" class="event-form">
 
 		<div class="form-group">
-			<label for="title">Add a new event</label>
-			<input type="text" class="form-control" data-ng-model="event.title" placeholder="Event name" />
+			<label for="title">Add a new appointment</label>
+			<input type="text" class="form-control" data-ng-model="appointment.title" placeholder="Event name" />
 		</div>
 		<div class="form-group">
-			<label for="title">Describe the event</label>
-			<input type="text" class="form-control" data-ng-model="event.text" placeholder="Event description" />
+			<label for="title">Describe the appointment</label>
+			<input type="text" class="form-control" data-ng-model="appointment.text" placeholder="Event description" />
 		</div>
 		<div class="form-group">
 			<label for="title">On what day will it start?</label>
@@ -24,13 +24,13 @@
 		</div>
 			<input type="submit" class="btn btn-default" value="Save" />
 		</form>
-		<input disabled type="text" value="{{event.datetime}}"/>
+		<input disabled type="text" value="{{appointment.datetime}}"/>
 		<ul class="event-output">
-			<li data-ng-repeat="event in events track by $index">
-				<span class="event-title">{{ event.title }}</span>
-				<span class="event-text">{{ event.text }}</span>
-				<span class="event-date">{{ event.datetime | date:'dd-MM-yyyy' }}</span>
-				<span class="event-date">{{ event.datetime | date:'HH:mm' }}</span>
+			<li data-ng-repeat="appointment in appointments track by $index">
+				<span class="event-title">{{ appointment.title }}</span>
+				<span class="event-text">{{ appointment.text }}</span>
+				<span class="event-date">{{ appointment.datetime | date:'dd-MM-yyyy' }}</span>
+				<span class="event-date">{{ appointment.datetime | date:'HH:mm' }}</span>
 			</li>
 		</ul>
 

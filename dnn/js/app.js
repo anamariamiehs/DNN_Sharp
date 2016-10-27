@@ -5,10 +5,10 @@
 	dnnApp.config(function($routeProvider) {
 		$routeProvider
 
-			// route for the event page
+			// route for the appointment page
 			.when('/', {
-				templateUrl : 'pages/event.html',
-				controller  : 'eventController'
+				templateUrl : 'pages/appointment.html',
+				controller  : 'appointmentController'
 			})
 
 			// route for the about page
