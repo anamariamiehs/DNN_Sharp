@@ -1,6 +1,7 @@
 dnnApp.controller('appointmentController', function($scope, $locale) {
   $scope.appointmentsJSON = [];
 
+  $scope.appointments = [];
   $scope.appointment = {};
   $scope.appointment.timestamp = null;
   $scope.appointment.title = '';
@@ -11,21 +12,10 @@ dnnApp.controller('appointmentController', function($scope, $locale) {
   $scope.date = new Date();
   $scope.time = new Date();
 
-  // func onPageLoad()
-  // {
-  //   var json = getJsonfromdisk();
-  //   $scope.events = JSON.parse(json);
-  // }
+  // $scope.$watch('appointments', function() {
+  //       // alert('hey, myVar has changed!');
+  // });
 
-  // func onSaveClick()
-  // {
-  //   var event = new Event();
-  //   // update event
-
-  //   $scope.events.add(event)
-  //   var json = JSON.stringify($scope.events)
-  //   savetodisk(json)
-  // }
 
 $scope.$on('$viewContentLoaded', function() {
     $scope.loadJSON();
@@ -35,8 +25,24 @@ $scope.loadJSON = function() {
   var json = localStorage.getItem('appointments');
     if (json !== null){
       $scope.appointmentsJSON = JSON.parse(json);
+      $scope.loadAppointments($scope.appointmentsJSON);
     }
 }
+
+  $scope.loadAppointments = function(json) {
+        var len = json.length;
+        var appointments = [];
+        for(var i=0; i<len; i++){
+            $scope.appointment.timestamp = moment(json[i].timestamp); 
+            $scope.appointment.title = json[i].title;
+            $scope.appointment.text = json[i].text; 
+            $scope.appointment.datetime = moment(json[i].date).milliseconds(0);
+            appointments.push($scope.appointment);
+        }
+        // _.defer(function() {
+        //   $scope.$apply(function(){$scope.appointments = appointments;});
+        // })
+  }
 
   $scope.createAppointment = function() {
     
@@ -71,7 +77,7 @@ $scope.loadJSON = function() {
   }
 
 //   $scope.deleteAppointment = function(appointment) {
-    // $scope.loadAppointment(appointment);
+//     $scope.loadAppointment(appointment);
 //     var len = $scope.appointment.length;
 //       while (len--) {
 //        if( $scope.appointment[len].timestamp === appointment.timestamp){
