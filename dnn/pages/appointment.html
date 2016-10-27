@@ -4,7 +4,7 @@
 
 		<div class="form-group">
 			<label for="title">Add a new appointment</label>
-			<input type="text" class="form-control" data-ng-model="appointment.title" placeholder="Event name" />
+			<input type="text" class="form-control" data-ng-model="appointment.title" ng-minlength="3" placeholder="Event name" />
 		</div>
 		<div class="form-group">
 			<label for="title">Describe the appointment</label>
@@ -24,14 +24,14 @@
 		</div>
 			<input type="submit" class="btn btn-default" value="Save" />
 		</form>
-		<input disabled type="text" value="{{appointment.datetime}}"/>
 		<ul class="event-output">
-			<li data-ng-repeat="appointment in appointments track by $index">
+			<li data-ng-repeat="appointment in appointments">
 				<span class="event-title">{{ appointment.title }}</span>
 				<span class="event-text">{{ appointment.text }}</span>
-				<span class="event-date">{{ appointment.datetime | date:'dd-MM-yyyy' }}</span>
-				<span class="event-date">{{ appointment.datetime | date:'HH:mm' }}</span>
+				<span class="event-date">{{ appointment.date | date:'dd-MM-yyyy' }}</span>
+				<span class="event-date">{{ appointment.date | date:'HH:mm' }}</span>
 			</li>
+			<li ng-show="!appointments.length">You have {{appointments.length}} appointments</li>
 		</ul>
 
 		<!--section class="cube-container">

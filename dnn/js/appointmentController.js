@@ -1,4 +1,4 @@
-dnnApp.controller('appointmentController', function($scope, $locale) {
+dnnApp.controller('appointmentController', function($scope) {
   $scope.appointmentsJSON = [];
 
   $scope.appointments = [];
@@ -12,14 +12,10 @@ dnnApp.controller('appointmentController', function($scope, $locale) {
   $scope.date = new Date();
   $scope.time = new Date();
 
-  // $scope.$watch('appointments', function() {
-  //       // alert('hey, myVar has changed!');
+  // $scope.$watch('appointments', function(newValue, oldValue) {
+  //    console.log(newValue);
+  //   console.log(oldValue);
   // });
-
-
-$scope.$on('$viewContentLoaded', function() {
-    $scope.loadJSON();
-});
 
 $scope.loadJSON = function() {
   var json = localStorage.getItem('appointments');
@@ -39,9 +35,9 @@ $scope.loadJSON = function() {
             $scope.appointment.datetime = moment(json[i].date).milliseconds(0);
             appointments.push($scope.appointment);
         }
-        // _.defer(function() {
-        //   $scope.$apply(function(){$scope.appointments = appointments;});
-        // })
+        // How to refresh data?
+       // $scope.$apply(function(){$scope.appointments = appointments;});
+      
   }
 
   $scope.createAppointment = function() {
