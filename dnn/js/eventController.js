@@ -1,45 +1,55 @@
 dnnApp.controller('eventController', function($scope) {
-  $scope.events = [];
-
-  $scope.timestamp = null;
-  $scope.eventTitle = '';
-  $scope.eventText = ''; 
-  $scope.date = moment().format('dddd D MMM');
+  $scope.event = new Object();
+  $scope.event.timestamp = '';
+  $scope.event.title = '';
+  $scope.event.text = ''; 
+  $scope.event.date = ''; 
+  $scope.event.time = ''; 
+  $scope.date = new Date();
   $scope.time = new Date();
 
-('HH:mm');
-  // $scope.events = (localStorage.getItem('events') !== null) ? JSON.parse($scope.events) : [ {timestamp: null,title: '',text: '',datetime: null} ];
-  // localStorage.setItem('events', JSON.stringify($scope.events));
+  // $scope.events = (localStorage.getItem('events') !== null) ? JSON.parse($scope.events) : [JSON.stringify($scope.event)];
+  if (localStorage.getItem('events') !== null) {
+    // $scope.events = JSON.parse($scope.events);
+  }
+  else if ($scope.event != undefined) {
+    $scope.events = [JSON.stringify($scope.event)];
+  }
+  else {
+    console.warn($scope.event)
+  }
+  localStorage.setItem('events', JSON.stringify($scope.events));
     
   $scope.resetEvent = function() {
-    $scope.timestamp = null;
-
-    $scope.eventTitle = '';
-    $scope.eventText = ''; 
-    $scope.eventDateTime = null;
-    $scope.date = moment().format('dddd D MMM');
+    $scope.event.timestamp = setTimestamp();
+    $scope.event.title = '';
+    $scope.event.text = ''; 
+    $scope.event.date = '';
+    $scope.event.time = '';
+    $scope.date = new Date();
     $scope.time = new Date();
   }
 
   $scope.createEvent = function() {
-    // $scope.eventDateTime = $scope.setEventDateTime($scope.date, $scope.time);
+    $scope.setEventDate($scope.date);
+    $scope.setEventTime($scope.time);
+
     $scope.events.push({
-			timestamp: $scope.setTimestamp(),
-      title: $scope.eventTitle,
-      text: $scope.eventText,
-      date: $scope.date,
-      time: $scope.time
+			timestamp: setTimestamp(),
+      title: $scope.event.title,
+      text: $scope.event.text,
+      date: $scope.event.date,
+      time: $scope.event.time
 		});
     
-    $scope.resetEvent();
-
+  $scope.resetEvent();
     localStorage.setItem('events', JSON.stringify($scope.events));
   }
 
   $scope.deleteEvent = function(event) {
     var len = $scope.events.length;
       while (len--) {
-       if( $scope.events[len] === event){
+       if( $scope.events[len].timestamp === event.timestamp){
          $scope.events.splice(len, 0);
           localStorage.setItem('events', JSON.stringify($scope.events));
           return;
@@ -47,45 +57,20 @@ dnnApp.controller('eventController', function($scope) {
     }
   }
 
-  $scope.setTimestamp = function() {
-    return moment().unix();
-  };
-
-  $scope.setEventDate = function(date){
-    var dt;
-    (typeof date === 'string') ? dt = moment(date,"ddd MMM Do yyyy HH:mm:ss ZZ") : date;
-    dt.format('dddd D MMM');
-    $scope.date = dt;
-    return $scope.date;
-  }
+$scope.setEventDate = function(date){
+  var dt = moment(date);
+  dt.format("dddd[,] D MMM yyyy");
+  $scope.event.date = dt;
+}
 
 $scope.setEventTime = function(time){
-    if (typeof time !== 'Moment') {
-      var t = time.getTime();
-       time = undefined;
-       time = moment(time);
-       time.format('HH:mm');
-    }
-    $scope.time = time;
-    return $scope.time;
+    var t = moment(time);
+    t.format('HH:mm');
+    $scope.event.time = t;
   }
-  // $scope.setEventDateTime = function(date, time){
-  //   var dt;
-  //   (typeof date === 'string') ? dt = moment(date,"ddd MMM Do yyyy HH:mm:ss ZZ") : date;
-  //   if (typeof time !== 'Moment') {
-  //     var t = time.getTime();
-  //      time = undefined;
-  //      time = moment(t);
-  //   }
-  //   //"Wed Oct 19 2016 00:00:00 GMT+0300 (GTB Daylight Time)"
-  //   var h = time.hours();
-  //   var m = time.minutes();
-  //   dt.hours(h);
-  //   dt.minutes(m);
-  //   dt.seconds(0);
-  //   $scope.eventDateTime = dt;
 
-  //   return $scope.eventDateTime;
-  // }
+  function setTimestamp() {
+    return moment().unix();
+  }
 
 });

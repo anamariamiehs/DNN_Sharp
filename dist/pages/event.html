@@ -4,11 +4,11 @@
 
 		<div class="form-group">
 			<label for="title">Add a new event</label>
-			<input type="text" class="form-control" data-ng-model="eventTitle" placeholder="Event name" />
+			<input type="text" class="form-control" data-ng-model="event.title" placeholder="Event name" />
 		</div>
 		<div class="form-group">
 			<label for="title">Describe the event</label>
-			<input type="text" class="form-control" data-ng-model="eventText" placeholder="Event description" />
+			<input type="text" class="form-control" data-ng-model="event.text" placeholder="Event description" />
 		</div>
 		<div class="form-group">
 			<label for="title">On what day will it start?</label>
@@ -16,11 +16,13 @@
 			<datepicker class="calendar">
 				<input class="form-control" ng-model="date"/>
 			</datepicker>
-		</div>
+			</div>
+			<input disabled type="text" value="{{event.date}}"/>
 		</div>
 		<div class="form-group" ng-controller="ClockPickerController">
 			<label for="title">At what time?</label>
 			<clockpicker ng-model="time"></clockpicker>
+			<input disabled type="text" value="{{event.time}}"/>
 		</div>
 			<input type="submit" class="btn btn-default" value="Save" />
 		</form>
