@@ -1,14 +1,14 @@
-<div class="jumbotron text-center" data-ng-controller="appointmentController">
+<div class="jumbotron text-center" data-ng-controller="appointmentController as aptCtrl">
 	<div class="event-section">
 		<form data-ng-submit="createAppointment()" class="event-form">
 
 		<div class="form-group">
 			<label for="title">Add a new appointment</label>
-			<input type="text" class="form-control" data-ng-model="appointment.title" ng-minlength="3" placeholder="Event name" />
+			<input type="text" class="form-control" data-ng-model="aptCtrl.appointment.title" ng-minlength="3" placeholder="Event name" />
 		</div>
 		<div class="form-group">
 			<label for="title">Describe the appointment</label>
-			<input type="text" class="form-control" data-ng-model="appointment.text" placeholder="Event description" />
+			<input type="text" class="form-control" data-ng-model="aptCtrl.appointment.text" placeholder="Event description" />
 		</div>
 		<div class="form-group">
 			<label for="title">On what day will it start?</label>
@@ -25,13 +25,13 @@
 			<input type="submit" class="btn btn-default" value="Save" />
 		</form>
 		<ul class="event-output">
-			<li data-ng-repeat="appointment in appointments">
+			<li data-ng-repeat="appointment in aptCtrl.appointments">
 				<span class="event-title">{{ appointment.title }}</span>
 				<span class="event-text">{{ appointment.text }}</span>
 				<span class="event-date">{{ appointment.date | date:'dd-MM-yyyy' }}</span>
-				<span class="event-date">{{ appointment.date | date:'HH:mm' }}</span>
+				<span class="event-time">{{ appointment.date | date:'HH:mm' }}</span>
 			</li>
-			<li ng-show="!appointments.length">You have {{appointments.length}} appointments</li>
+			<li ng-show="!aptCtrl.appointments.length">You have {{aptCtrl.appointments.length}} appointments</li>
 		</ul>
 
 		<!--section class="cube-container">
