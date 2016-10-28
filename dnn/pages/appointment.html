@@ -1,48 +1,49 @@
 <div class="jumbotron text-center" data-ng-controller="appointmentController as aptCtrl">
-	<div class="event-section">
-		<form data-ng-submit="createAppointment()" class="event-form">
-
-		<div class="form-group">
-			<label for="title">Add a new appointment</label>
-			<input type="text" class="form-control" data-ng-model="aptCtrl.appointment.title" ng-minlength="3" placeholder="Event name" />
-		</div>
-		<div class="form-group">
-			<label for="title">Describe the appointment</label>
-			<input type="text" class="form-control" data-ng-model="aptCtrl.appointment.text" placeholder="Event description" />
-		</div>
-		<div class="form-group">
-			<label for="title">On what day will it start?</label>
-			<div class="calendar-container">
-			<datepicker class="calendar">
-				<input class="form-control" ng-model="date"/>
-			</datepicker>
+		<div class="event-section">
+			<form data-ng-submit="aptCtrl.createAppointment()" class="event-form">
+			<div class="form-group">
+				<label for="title">Add a new appointment</label>
+				<input type="text" class="form-control" data-ng-model="aptCtrl.appointment.title" ng-minlength="3" placeholder="Event name" />
 			</div>
+			<div class="form-group">
+				<label for="title">Describe the appointment</label>
+				<input type="text" class="form-control" data-ng-model="aptCtrl.appointment.text" placeholder="Event description" />
+			</div>
+			<div class="form-group">
+				<label for="title">On what day will it start?</label>
+				<div class="calendar-container">
+				<datepicker class="calendar">
+					<input class="form-control" ng-model="date"/>
+				</datepicker>
+				</div>
+			</div>
+			<div class="form-group" ng-controller="ClockPickerController">
+				<label for="title">At what time?</label>
+				<clockpicker ng-model="time"></clockpicker>
+			</div>
+				<input type="submit" class="btn btn-default" value="Save" />
+			</form>
 		</div>
-		<div class="form-group" ng-controller="ClockPickerController">
-			<label for="title">At what time?</label>
-			<clockpicker ng-model="time"></clockpicker>
-		</div>
-			<input type="submit" class="btn btn-default" value="Save" />
-		</form>
-		<ul class="event-output">
-			<li data-ng-repeat="appointment in aptCtrl.appointments">
-				<span class="event-title">{{ appointment.title }}</span>
-				<span class="event-text">{{ appointment.text }}</span>
-				<span class="event-date">{{ appointment.date | date:'dd-MM-yyyy' }}</span>
-				<span class="event-time">{{ appointment.date | date:'HH:mm' }}</span>
-			</li>
-			<li ng-show="!aptCtrl.appointments.length">You have {{aptCtrl.appointments.length}} appointments</li>
-		</ul>
 
-		<!--section class="cube-container">
-		<div id="cube" class="cube">
-			<figure class="front">1</figure>
-			<figure class="back">2</figure>
-			<figure class="right">3</figure>
-			<figure class="left">4</figure>
-			<figure class="top">5</figure>
-			<figure class="bottom">6</figure>
+			<ul class="event-output">
+				<li data-ng-repeat="appointment in aptCtrl.appointments | limitTo:4 track by $index">
+					<span class="event-title">{{ appointment.title }}</span>
+					<span class="event-text">{{ appointment.text }}</span>
+					<span class="event-date">{{ appointment.date | date:'dd-MM-yyyy' }}</span>
+					<span class="event-time">{{ appointment.date | date:'HH:mm' }}</span>
+				</li>
+				<li ng-show="!aptCtrl.appointments.length">You have {{aptCtrl.appointments.length}} appointments</li>
+			</ul>
 		</div>
-		</section-->
-	</div>
+
+			<!--section class="cube-container">
+			<div id="cube" class="cube">
+				<figure class="front">1</figure>
+				<figure class="back">2</figure>
+				<figure class="right">3</figure>
+				<figure class="left">4</figure>
+				<figure class="top">5</figure>
+				<figure class="bottom">6</figure>
+			</div>
+			</section-->
 </div>

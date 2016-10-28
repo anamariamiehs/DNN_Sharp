@@ -6,16 +6,18 @@ dnnApp.controller('appointmentController', ['$scope', function($scope) {
   vm.appointment.timestamp = null;
   vm.appointment.title = '';
   vm.appointment.text = ''; 
-  vm.appointment.datetime; 
+  vm.appointment.date = null; 
   $scope.date = new Date();
   $scope.time = new Date();
 
 vm.loadAppointments = function() {
   var json = localStorage.getItem('appointments');
-    if (json !== null){
-      var data = JSON.parse(json);
-      vm.appointments = data;
+    if (json == null || json == "[]"){
+      vm.appointments = [];
+      return;
     }
+    var data = JSON.parse(json);
+    vm.appointments = data;
 }();
 
 $scope.$on('$viewContentLoaded', function() {
@@ -31,43 +33,51 @@ $scope.$on('$viewContentLoaded', function() {
     datetime.hours(time.hours());
     datetime.minutes(time.minutes());
     datetime.seconds(time.seconds());
-    vm.appointment.datetime = moment(datetime).milliseconds(0).toISOString();
-    var appointmentJSON = {
-      timestamp: parseInt(vm.appointment.timestamp),
+    datetime.milliseconds(0);
+    var iso = moment(datetime).toISOString();
+    vm.appointment.date = iso;
+    console.log(vm.appointment, vm.appointments)
+    vm.appointments.push({
+      timestamp: vm.appointment.timestamp,
       title: vm.appointment.title,
       text: vm.appointment.text,
-      date: vm.appointment.datetime
-    }
-    vm.appointmentsJSON.push(appointmentJSON);
-
-    var json = JSON.stringify(vm.appointmentsJSON);
-    vm.resetAppointment();
+      date: vm.appointment.date
+    });
+    vm.sortAppointments();
+    var json = JSON.stringify(vm.appointments);
     localStorage.setItem('appointments', json);
-
-    console.log(vm.appointments, "createAppointment")
+    vm.resetAppointment();
 }
   
   vm.resetAppointment = function() {
     vm.appointment.timestamp = null;
     vm.appointment.title = '';
     vm.appointment.text = ''; 
-    vm.appointment.datetime = null;
+    vm.appointment.date = null;
     $scope.date = new Date();
     $scope.time = new Date();
   }
 
-//   vm.deleteAppointment = function(appointment) {
-//     vm.loadAppointment(appointment);
-//     var len = vm.appointment.length;
-//       while (len--) {
-//        if( vm.appointment[len].timestamp === appointment.timestamp){
-//          vm.appointment.splice(len, 0);
-//           var json = JSON.stringify(vm.appointmentsJSON);
-//           localStorage.setItem('appointment', json);
-//           return;
-//        }
-//     }
-//   }
+  vm.sortAppointments = function() {
+    var arr = vm.appointments;
+    arr.sort(vm.compareDates);
+    console.log("sorted", arr);
+    vm.appointments = arr;
+    }
+    
+    vm.compareDates = function(a, b) {
+      aDate = new Date(a.date);
+      bDate = new Date(b.date);
+      if (aDate < bDate) return -1;
+      if (aDate > bDate) return 1;
+      return 0;
+    }
 
-
+  vm.deleteAppointment = function(i) {
+    if(!vm.appointments.length) vm.loadAppointments();
+    var arr = vm.appointments.splice(i, 1);
+    vm.sortAppointments();
+    var json = JSON.stringify(vm.appointments);
+    localStorage.setItem('appointments', json);
+  }
 }]);
