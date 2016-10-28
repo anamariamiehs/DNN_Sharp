@@ -18,3 +18,44 @@
   user-select: none;           /* Non-prefixed version, currently
                                   not supported by any browser */
 }
+
+.abs-center(){
+    position: absolute;
+    top:0;
+    right:0;
+    bottom:0;
+    left:0;
+}
+
+.borderRadius(@aValue: 0) {
+    -webkit-border-radius: @aValue;
+       -moz-border-radius: @aValue;
+        -ms-border-radius: @aValue;
+            border-radius: @aValue;
+}
+
+.transition (@transition:opacity, @duration: 0.4s, @delay: 0ms) {
+	-webkit-transition: @transition @duration cubic-bezier(0.25, 0.46, 0.45, 0.94);  
+	-moz-transition:    @transition @duration cubic-bezier(0.25, 0.46, 0.45, 0.94);
+	-ms-transition:     @transition @duration cubic-bezier(0.25, 0.46, 0.45, 0.94); 
+	-o-transition:      @transition @duration cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    transition:         @transition @duration cubic-bezier(0.25, 0.46, 0.45, 0.94);
+	  
+	-webkit-transition-delay: @delay;
+    -moz-transition-delay: @delay;
+    -ms-transition-delay: @delay;
+    -o-transition-delay: @delay;
+    transition-delay: @delay;
+}
+
+.transformOrigin(@x: 50%, @y: 50%){
+    -ms-transform-origin: @x @y; /* IE 9 */
+    -webkit-transform-origin: @x @y; /* Chrome, Safari, Opera */
+    transform-origin: @x @y;
+}
+
+.scale(@x: 1, @y:1){
+    -ms-transform: scale(@x, @y); /* IE 9 */
+    -webkit-transform: scale(@x, @y); /* Safari */
+    transform: scale(@x, @y);
+}

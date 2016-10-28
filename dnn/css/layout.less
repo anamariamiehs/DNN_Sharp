@@ -3,46 +3,67 @@ body {
     font-family:@font-name, @font-fallback;
 }
 
-.event-section {
-    .center-block();
-    max-width: 320px;
+.btn-close {
+    width: 32px;
+    height: 32px;
+    position: absolute;
+    right: 0;
+    top: 0;
 }
 
-.ui-clockpicker {
-    margin:auto;
+.event-form{
+    position: relative;
+    height: 100%;
+    .form-group{
+        .calendar-container, .clockpicker-container {
+            min-height: 32px;
+        }
+    }
+    .btn{
+        position: absolute;
+        left:50%;
+        margin-left:-30px;
+        bottom:0;
+    }
 }
-
 .form-control {
-color:@color-primary;
-.box-shadow(0 1px 4px rgba(0,0,0,0,3));
+    color:@color-primary;
+    border-color: transparent;
 }
 
-ul.event-output {
-    list-style: none;
-    padding: 0;
-    margin-top:@dimen;
-    li {
-        display: block;
-        padding: 4px;
-        margin: @dimen 4px;
-        border-radius: 2px;
-        border: 1px dashed lighten(@color-primary, 40%);
-        box-shadow: 0 0 0 4px #fff, @clock-shadow;
-        background: #fff;
+.clockpicker-container {
+        width: 190px;
+        margin: auto;
+        
+    .ui-clockpicker {
+        .borderRadius();
+        .transition(all);
+        .transformOrigin(50%, 0);
+        .scale(1, 0.2);
+        position: absolute;
+        z-index: 10;
+    }
+    &:hover, &:active, &.active {
+       .ui-clockpicker {
+        .scale();
+        }
+    }
+}
 
-        .event-title {
-            font-weight: bold;
-        }
-        .event-text {
-            
-        }
+.event-output {
 
-        .event-date {
-            font-weight: bold;
-        }
+    .event-title {
+        font-weight: bold;
+    }
+    .event-text {
+        
+    }
 
-        .event-time {
-            
-        }
+    .event-date {
+        font-weight: bold;
+    }
+
+    .event-time {
+        
     }
 }

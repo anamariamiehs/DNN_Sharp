@@ -3,6 +3,7 @@
   height: @cube-dimen;
   position: relative;
   perspective: @cube-perspective;
+  .transformOrigin(50%, 50%);
 
   .cube {
     width: 100%;
@@ -16,10 +17,10 @@
     &.show-top    { transform: rotateX(  -90deg ) translateZ( -@cube-translate-z ); }
     &.show-bottom { transform: rotateX(   90deg ) translateZ( -@cube-translate-z ); }
     
-    .front  { transform: rotateY(   0deg )  translateZ( @cube-translate-z ); }
-    .back   { transform: rotateX( 180deg )  translateZ( @cube-translate-z ); }
-    .right  { transform: rotateY(  90deg )  translateZ( @cube-translate-z ); }
-    .left   { transform: rotateY( -90deg )  translateZ( @cube-translate-z ); }
+    .front, .lateral-0  { transform: rotateY(   0deg )  translateZ( @cube-translate-z ); }
+    .back, .lateral-2   { transform: rotateX( 180deg )  translateZ( @cube-translate-z ); }
+    .right, .lateral-1  { transform: rotateY(  90deg )  translateZ( @cube-translate-z ); }
+    .left, .lateral-3   { transform: rotateY( -90deg )  translateZ( @cube-translate-z ); }
     .top    { transform: rotateX(  90deg )  translateZ( @cube-translate-z ); }
     .bottom { transform: rotateX( -90deg )  translateZ( @cube-translate-z ); }
 
@@ -35,6 +36,44 @@
         display: block;
         position: absolute;
         box-shadow: 0 0 2px black;
-
+        >.abs-container{
+          .abs-center();
+          padding: 5%;
+        }
     }
+
+    &.responsive{
+      width: 100%;
+      height: auto;
+      padding-bottom:100%;
+
+      .cube {
+            top: 50%;
+            left: 50%;
+            margin: -25% 0 0 -25%;
+      }
+   }
+
+   &.dark-theme {
+
+     .cube {
+        .front, .lateral-0,
+        .back, .lateral-2,
+        .right, .lateral-1,
+        .left, .lateral-3   {
+          background: @cube-bg-event;
+          color: @cube-text-event;
+        }
+        .top    {
+          background: @cube-bg-add-event;
+          color: @cube-text-add-event;
+        }
+        .bottom {
+          background: @cube-bg;
+          color: @cube-text;
+        }
+
+      }
+
+   }
 }
