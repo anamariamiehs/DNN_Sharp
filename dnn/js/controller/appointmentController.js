@@ -1,6 +1,5 @@
-dnnApp.controller('appointmentController', ['$scope', function($scope) {
+dnnApp.controller('appointmentController', ['$scope', 'dateTimeService', function($scope, dateTimeService) {
   var vm = this;
-
   vm.appointments = [];
   vm.appointment = {};
   vm.appointment.timestamp = null;
@@ -8,7 +7,6 @@ dnnApp.controller('appointmentController', ['$scope', function($scope) {
   vm.appointment.text = ''; 
   vm.appointment.date = null; 
   $scope.date = new Date();
-  $scope.time = new Date();
 
 vm.loadAppointments = function() {
   var json = localStorage.getItem('appointments');
@@ -28,7 +26,8 @@ $scope.$on('$viewContentLoaded', function() {
     
     vm.appointment.timestamp = moment().unix();
     var date = moment($scope.date);
-    var time = moment($scope.time);
+    var time = dateTimeService.getDateTime();
+    time = moment(time);
     var datetime = date;
     datetime.hours(time.hours());
     datetime.minutes(time.minutes());
@@ -55,7 +54,6 @@ $scope.$on('$viewContentLoaded', function() {
     vm.appointment.text = ''; 
     vm.appointment.date = null;
     $scope.date = new Date();
-    $scope.time = new Date();
   }
 
   vm.sortAppointments = function() {
@@ -79,5 +77,14 @@ $scope.$on('$viewContentLoaded', function() {
     vm.sortAppointments();
     var json = JSON.stringify(vm.appointments);
     localStorage.setItem('appointments', json);
+  }
+
+  vm.clamp = function(min, max, val) {
+    return Math.max(min, Math.min(val, max));
+  }
+  
+  vm.setCube = function(len) {
+    var i = vm.clamp(0, 3, len-1);
+    return new Array(i);
   }
 }]);

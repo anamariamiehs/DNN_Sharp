@@ -1,16 +1,17 @@
 <div class="jumbotron text-center" data-ng-controller="appointmentController as aptCtrl">
-	<section class="cube-container responsive dark-theme" tabindex="0" ng-keypress="key($event)">
-		<div id="cube" class="cube show-top">
+	<section class="cube-containerZ responsive dark-theme">
+		<div id="cube" class="cubeZ show-top">
 			<figure class="top">
 				<div class="abs-container">
 					<form name="aptForm" data-ng-submit="aptCtrl.createAppointment()" class="event-form">
 					<div class="form-group">
-						<input type="text" name="titleInput" class="form-control  input-sm" data-ng-model="aptCtrl.appointment.title" ng-minlength="3" ng-maxlength="50" placeholder="Event name" />
-						<code ng-show="aptForm.textInput.$error">Please check again</code><br/>
+						<input type="text" name="titleInput" class="form-control  input-sm" data-ng-model="aptCtrl.appointment.title" ng-minlength="3" ng-maxlength="85" placeholder="Event name" />
+						<span class="error" ng-show="aptForm.titleInput.$touched && aptForm.titleInput.$error.minlength">Title is too short</span><br/>
+						<span class="error" ng-show="aptForm.titleInput.$error.maxlength">Title is too long</span><br/>
 					</div>
 					<div class="form-group">
-						<input type="text" class="form-control input-sm" name="textInput" data-ng-model="aptCtrl.appointment.text" ng-maxlength="100" placeholder="Event description" />
-						<code ng-show="aptForm.textInput.$error">Please check again</code><br/>
+						<textarea class="form-control input-sm" name="textInput" data-ng-model="aptCtrl.appointment.text" ng-maxlength="255" placeholder="Event description" ></textarea>
+						<span class="error" ng-show="aptForm.textInput.$error.maxlength">Text is too long</span><br/>
 					</div>
 					<div class="form-group">
 						<div class="calendar-container">
@@ -18,14 +19,17 @@
 							<input class="form-control  input-sm" ng-model="date"/>
 						</datepicker>
 						</div>
+						<span class="error" ng-show="aptForm.dateInput.$pristine">You did not specify the date</span><br/>
 					</div>
-					<div class="form-group clock-form-group" ng-controller="ClockPickerController">
-						<div class="clockpicker-container">
-							<clockpicker ng-model="time"></clockpicker>
-							<!--TODO: replace clockpicker with a small timepicker -->
-						</div>
+					<!-- -->
+					<div data-ng-controller="AptTimepickerController as tpCtrl">
+						<div uib-timepicker ng-model="time" ng-change="setTime()" hour-step="hstep" minute-step="mstep" show-meridian="false"></div>
+						<pre class="alert alert-info">Time is: {{time | date:'shortTime' }}</pre>
 					</div>
-					<input type="submit" class="btn btn-default" value="Save" />
+					<!-- -->
+					<div class="form-group">
+						<input type="submit" class="btn btn-default" value="Add appointment" />
+					</div>
 					</form>
 				</div>
 			</figure>
@@ -37,6 +41,7 @@
 					<span class="event-time">{{ appointment.date | date:'HH:mm' }}</span>
 				</div>
 			</figure>
+			<figure ng-repeat="t in setCube(aptCtrl.appointments.length) track by $index" class="lateral-{{aptCtrl.appointments.length - $index}}"></figure>
 			<figure class="bottom">
 				<div class="abs-container">
 					<h1>Some static stuff</h1>

@@ -1,6 +1,6 @@
 	// create the module and name it dnnApp
-	var dnnApp = angular.module('dnnApp', ['ngRoute', 'ui.clockpicker', '720kb.datepicker']);
-
+	angular.module('dnnApp', ['ngRoute', 'ui.bootstrap.timepicker', '720kb.datepicker']);
+	var dnnApp = angular.module('dnnApp');
 	// configure our routes
 	dnnApp.config(function($routeProvider) {
 		$routeProvider
