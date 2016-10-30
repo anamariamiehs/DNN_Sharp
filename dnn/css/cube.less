@@ -15,19 +15,19 @@
     width: 100%;
     height: 100%;
     position: absolute;
-    // &.show-front  { transform: rotateY(    0deg ) translateZ( -@cube-translate ); }
-    // &.show-back   { transform: rotateX( -180deg ) translateZ( -@cube-translate ); }
-    // &.show-right  { transform: rotateY(  -90deg ) translateZ( -@cube-translate ); }
-    // &.show-left   { transform: rotateY(   90deg ) translateZ( -@cube-translate ); }
-    // &.show-top    { transform: rotateX(  -90deg ) translateZ( -@cube-translate ); }
-    // &.show-bottom { transform: rotateX(   90deg ) translateZ( -@cube-translate ); }
+    &.show-front  { transform: rotateY(    0deg ) translateZ( -@cube-translate ); }
+    &.show-back   { transform: rotateX( -180deg ) translateZ( -@cube-translate ); }
+    &.show-right  { transform: rotateY(  -90deg ) translateZ( -@cube-translate ); }
+    &.show-left   { transform: rotateY(   90deg ) translateZ( -@cube-translate ); }
+    &.show-top    { transform: rotateX(  -90deg ) translateZ( -@cube-translate ); }
+    &.show-bottom { transform: rotateX(   90deg ) translateZ( -@cube-translate ); }
 
-    &.show-front  { transform: rotateY(    0deg ) translate3d( 0, -@cube-translate, 0 ); }
-    &.show-back   { transform: rotateX( -180deg ) translate3d( 0, @cube-translate, @cube-translate ); }
-    &.show-right  { transform: rotateY(  -90deg ) translate3d( 0, -@cube-translate, -@cube-translate ); }
-    &.show-left   { transform: rotateY(   90deg ) translate3d( 0, -@cube-translate, @cube-translate ); }
-    &.show-top    { transform: rotateX(  -90deg ) translate3d( 0, -@cube-translate, -@cube-translate ); }
-    &.show-bottom { transform: rotateX(   90deg ) translate3d( 0, @cube-translate, @cube-translate ); }
+    // &.show-front  { transform: rotateY(    0deg ) translate3d( 0, -@cube-translate, 0 ); }
+    // &.show-back   { transform: rotateX( -180deg ) translate3d( 0, @cube-translate, @cube-translate ); }
+    // &.show-right  { transform: rotateY(  -90deg ) translate3d( 0, -@cube-translate, -@cube-translate ); }
+    // &.show-left   { transform: rotateY(   90deg ) translate3d( 0, -@cube-translate, @cube-translate ); }
+    // &.show-top    { transform: rotateX(  -90deg ) translate3d( 0, -@cube-translate, -@cube-translate ); }
+    // &.show-bottom { transform: rotateX(   90deg ) translate3d( 0, @cube-translate, @cube-translate ); }
 
     .front, .lateral-0  { transform: rotateY(   0deg )  translateZ( @cube-translate ); }
     .back, .lateral-2   { transform: rotateX( 180deg )  translateZ( @cube-translate ); }

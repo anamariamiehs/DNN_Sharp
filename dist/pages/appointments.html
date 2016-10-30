@@ -1,0 +1,22 @@
+<!-- EVENTS PAGE -->
+<i data-ng-controller="appointmentController as aptCtrl" ng-init="aptCtrl.loadAppointments()">
+<figure data-ng-repeat="appointment in aptCtrl.appointments | limitTo:4 track by $index" class="lateral-{{$index}}">
+	<div class="abs-container events">
+		<span class="event-title">{{ appointment.title }}</span>
+		<div class="event-datetime">
+			<div class="date">
+				<div class=" highlight">{{ appointment.date | date:'EEE' }}</div>
+				<div>{{ appointment.date | date:'dd MMM' }}</div>
+			</div>
+			<div class="time">
+				{{ appointment.date | date:'HH:mm' }}
+				<span ng-show={{appointment.checked}}>all day<br/>event</span>
+			</div>
+			<div class="clearfix"></div>
+		</div>
+		<span class="event-text">{{ appointment.text }}</span>
+	</div>
+</figure>
+<figure ng-repeat="t in setCube(aptCtrl.appointments.length) track by $index" class="lateral-{{aptCtrl.appointments.length - $index}}"></figure>
+
+</i>

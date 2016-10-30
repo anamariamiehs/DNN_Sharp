@@ -100,15 +100,13 @@ gulp.task('lr-server', function() {
 gulp.task('html', function() {
     gulp.src("./dnn/index.html")
         .pipe(embedlr())
-        .pipe(gulp.dest('dist'))
-        .pipe(refresh(server))
-        .pipe(browserSync.stream({match: '**/index.html'}));
-
+        .pipe(gulp.dest('./dist'));
+        
     gulp.src("./dnn/pages/*.html")
         .pipe(embedlr())
         .pipe(gulp.dest('./dist/pages'))
         .pipe(refresh(server))
-        .pipe(browserSync.stream({match: '**/*.html'}));
+        .pipe(browserSync.stream({match: '**.html'}));
 })
 
 gulp.task('serve', function() {

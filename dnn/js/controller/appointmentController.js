@@ -16,6 +16,7 @@ vm.loadAppointments = function() {
     }
     var data = JSON.parse(json);
     vm.appointments = data;
+    // listService.setData(vm.appointments);
 }();
 
 // $scope.$on('$viewContentLoaded', function() {
@@ -45,6 +46,7 @@ vm.loadAppointments = function() {
     vm.sortAppointments();
     var json = JSON.stringify(vm.appointments);
     localStorage.setItem('appointments', json);
+    // listService.setData(vm.appointments);
     vm.resetAppointment();
 }
   

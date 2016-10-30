@@ -1,4 +1,5 @@
-// dnnApp.directive('cubenav', ['animateCubeService', 'Constants', function (animateCubeService, Constants) {
+dnnApp.directive('cubenav', ['$rootScope', '$location','animateCubeService', 'Constants', function ($rootScope, $location, animateCubeService, Constants) {
+//TODO: Figure out how to do the routed cube
 
 //   function moveHorizontal(keyCode, element){
 //       var dir = (keyCode == 39) ? 1: -1;
@@ -37,7 +38,7 @@
 //             //left right
 //             if (keyCode == 37 || keyCode == 39){
 //                 if(isHorizontal){
-//                     moveHorizontal(keyCode, current);
+//                     //moveHorizontal(keyCode, current);
 //                 }
 //             }
 //             //top bottom
@@ -47,28 +48,73 @@
 
 // }
 
-// // function clamp(min, max, val){
-// //     return Math.max(min, Math.min(val, max));
-// // }
-
-// function clampLoop(min, max, val){
-//     if (val > max) return min;
-//     if (val < min) return max;
-//     return val;
+// function clamp(min, max, val){
+//     return Math.max(min, Math.min(val, max));
 // }
 
-//     return {
-//         link: function(scope, element){
-//             element.on('load', function(){
-//                 // var className = animateCubeService.getClassName();
-//                 // var current = element[0].querySelector("#cube");
-//                 // current.className = "cube " + className;
-//             });
-//              // Bind to the window resize event for each directive instance.
-//              angular.element(element).on('keyup', function(){
-//                 //   var keyCode = animateCubeService.getKeyCode();
-//                 //   moveCube(keyCode, element);
-//              });
-//         }
-//     };
-// }]);
+function clampLoop(min, max, val){
+    if (val > max) return min;
+    if (val < min) return max;
+    return val;
+}
+
+    return {
+        link: function(scope, element){
+            element.on('load', function(){
+                console.log('load: ' + $location.path());
+                // var className = animateCubeService.getClassName();
+                // var current = element[0].querySelector("#cube");
+                // current.className = "cube " + className;
+            });
+             // Bind to the window resize event for each directive instance.
+             angular.element(element).on('keyup', function(){
+                var route = animateCubeService.getRoute();
+                var prevRoute = animateCubeService.getPrevRoute();
+                var keyCode = animateCubeService.getKeyCode();
+                if(route == Constants.Routes[1]) {
+                    // Route '/add' 
+                    if (keyCode == 37 || keyCode == 39){
+                    //left right
+                    element.className = "cube " + Constants.AnimateCube[4];
+                    }
+                    if (keyCode == 38 || keyCode == 40){
+                     //top bottom
+                    element.className = "cube " + Constants.AnimateCube[0];
+                    }   
+                } else if(route == Constants.Routes[2]){
+                    // Route '/about'
+                    if (keyCode == 37 || keyCode == 39 || keyCode == 38 || keyCode == 40){
+                        element.className = "cube " + Constants.AnimateCube[0];
+                    }
+    
+                } else {
+                    // Route '/' the 4 events
+                    if (keyCode == 37 || keyCode == 39){
+                    //left right
+                        //TODO: Move laterally through events
+                        //TODO: get cube event position between 0-4
+                        var pos = 2;
+                        var loop = clampLoop(0, 4, pos);
+                        element.className = "cube " + Constants.AnimateCube[loop];
+                    }
+                    if (keyCode == 38){
+                       //top go to Add route
+                        element.className = "cube " + Constants.AnimateCube[4];
+                    } if (keyCode == 40){
+                     // bottom go to About route
+                        element.className = "cube " + Constants.AnimateCube[5];
+                    }
+                    
+                }
+                
+                //   moveCube(keyCode, element);
+             });
+             $rootScope.$on('$routeChangeSuccess', function(e, current, pre) {
+                console.log('routechange: ' + $location.path());
+                animateCubeService.setRoute($location.path());
+            });
+
+        }
+    };
+}]);
+

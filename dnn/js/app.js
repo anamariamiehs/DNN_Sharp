@@ -3,14 +3,19 @@
 	var dnnApp = angular.module('dnnApp');
 
 	dnnApp.constant('Constants', {
-		Facets: {
-			0: 'lateral-0',
-			1: 'lateral-1',
-			2: 'lateral-2',
-			3: 'lateral-3',
-			4: 'top',
-			5: 'bottom'
+		Routes: {
+			0: '/',
+			1: '/add',
+			2: '/about'
 		},
+		// Facets: {
+		// 	0: 'lateral-0',
+		// 	1: 'lateral-1',
+		// 	2: 'lateral-2',
+		// 	3: 'lateral-3',
+		// 	4: 'top',
+		// 	5: 'bottom'
+		// },
 		AnimateCube: {
 			0: 'show-front',
 			1: 'show-right',
@@ -21,18 +26,19 @@
 		}
 	});
 	// configure our routes
-	dnnApp.config(function($routeProvider) {
+	dnnApp.config(function($routeProvider, Constants) {
 		$routeProvider
-
 			// route for the appointment page
-			.when('/', {
-				templateUrl : 'pages/appointment.html',
-				controller  : 'appointmentController'
+			.when(Constants.Routes[0], {
+				templateUrl : 'pages/appointments.html'
+				
 			})
 
+			.when(Constants.Routes[1], {
+				templateUrl : 'pages/add.html'
+			})
 
-			// route for the about page
-			.when('/about', {
+			.when(Constants.Routes[2], {
 				templateUrl : 'pages/about.html',
 				controller  : 'aboutController'
 			})
