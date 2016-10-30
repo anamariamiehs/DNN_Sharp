@@ -18,9 +18,9 @@ vm.loadAppointments = function() {
     vm.appointments = data;
 }();
 
-$scope.$on('$viewContentLoaded', function() {
-    console.log(vm.appointments, "viewContentLoaded")
-});
+// $scope.$on('$viewContentLoaded', function() {
+//     console.log(vm.appointments, "viewContentLoaded")
+// });
 
   vm.createAppointment = function() {
     

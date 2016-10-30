@@ -59,3 +59,12 @@
     -webkit-transform: scale(@x, @y); /* Safari */
     transform: scale(@x, @y);
 }
+
+.makeTitle(@color){
+    background: darken(saturate(@color, 50%), 15%);
+}
+
+.makeDateTime(@color){
+    background: darken(saturate(@color, 25%), 30%);
+    color: mix(#fff, @color, 10%);
+}

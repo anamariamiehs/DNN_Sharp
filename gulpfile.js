@@ -32,6 +32,7 @@ var resJs = [
 var js = [
         './dnn/js/app.js',
         './dnn/js/service/*.js',
+        './dnn/js/directive/*.js',
         './dnn/js/controller/*.js'
         ]
 

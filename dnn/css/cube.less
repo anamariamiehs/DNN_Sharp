@@ -3,29 +3,59 @@
   height: @cube-dimen;
   position: relative;
   perspective: @cube-perspective;
-  .transformOrigin(50%, 50%);
+  margin:auto;
+
+  .cube-offset{
+    position: absolute;
+    height: @cube-dimen;
+    transform:translateY( @cube-translate );
+    }
 
   .cube {
     width: 100%;
     height: 100%;
     position: absolute;
+    // &.show-front  { transform: rotateY(    0deg ) translateZ( -@cube-translate ); }
+    // &.show-back   { transform: rotateX( -180deg ) translateZ( -@cube-translate ); }
+    // &.show-right  { transform: rotateY(  -90deg ) translateZ( -@cube-translate ); }
+    // &.show-left   { transform: rotateY(   90deg ) translateZ( -@cube-translate ); }
+    // &.show-top    { transform: rotateX(  -90deg ) translateZ( -@cube-translate ); }
+    // &.show-bottom { transform: rotateX(   90deg ) translateZ( -@cube-translate ); }
 
-    &.show-front  { transform: rotateY(    0deg ) translateZ( -@cube-translate-z ); }
-    &.show-back   { transform: rotateX( -180deg ) translateZ( -@cube-translate-z ); }
-    &.show-right  { transform: rotateY(  -90deg ) translateZ( -@cube-translate-z ); }
-    &.show-left   { transform: rotateY(   90deg ) translateZ( -@cube-translate-z ); }
-    &.show-top    { transform: rotateX(  -90deg ) translateZ( -@cube-translate-z ); }
-    &.show-bottom { transform: rotateX(   90deg ) translateZ( -@cube-translate-z ); }
-    
-    .front, .lateral-0  { transform: rotateY(   0deg )  translateZ( @cube-translate-z ); }
-    .back, .lateral-2   { transform: rotateX( 180deg )  translateZ( @cube-translate-z ); }
-    .right, .lateral-1  { transform: rotateY(  90deg )  translateZ( @cube-translate-z ); }
-    .left, .lateral-3   { transform: rotateY( -90deg )  translateZ( @cube-translate-z ); }
-    .top    { transform: rotateX(  90deg )  translateZ( @cube-translate-z ); }
-    .bottom { transform: rotateX( -90deg )  translateZ( @cube-translate-z ); }
+    &.show-front  { transform: rotateY(    0deg ) translate3d( 0, -@cube-translate, 0 ); }
+    &.show-back   { transform: rotateX( -180deg ) translate3d( 0, @cube-translate, @cube-translate ); }
+    &.show-right  { transform: rotateY(  -90deg ) translate3d( 0, -@cube-translate, -@cube-translate ); }
+    &.show-left   { transform: rotateY(   90deg ) translate3d( 0, -@cube-translate, @cube-translate ); }
+    &.show-top    { transform: rotateX(  -90deg ) translate3d( 0, -@cube-translate, -@cube-translate ); }
+    &.show-bottom { transform: rotateX(   90deg ) translate3d( 0, @cube-translate, @cube-translate ); }
+
+    .front, .lateral-0  { transform: rotateY(   0deg )  translateZ( @cube-translate ); }
+    .back, .lateral-2   { transform: rotateX( 180deg )  translateZ( @cube-translate ); }
+    .right, .lateral-1  { transform: rotateY(  90deg )  translateZ( @cube-translate ); }
+    .left, .lateral-3   { transform: rotateY( -90deg )  translateZ( @cube-translate ); }
+    .top    { transform: rotateX(  90deg )  translateZ( @cube-translate ); }
+    .bottom { transform: rotateX( -90deg )  translateZ( @cube-translate ); }
+
+    .front, .lateral-0,
+    .back, .lateral-2,
+    .right, .lateral-1,
+    .left, .lateral-3
+    .top,
+    .bottom {
+        pointer-events: none;
+    }
+
+    &.show-front .lateral-0,
+    &.show-back .lateral-2,
+    &.show-right .lateral-1,
+    &.show-left .lateral-3,
+    &.show-top .top,
+    &.show-bottom .bottom {
+        pointer-events: all;
+    }
 
     transform-style: preserve-3d;
-    transform: translateZ( -@cube-translate-z );
+    transform: translateZ( -@cube-translate );
     transition: transform 1s;
    }
 
@@ -38,7 +68,10 @@
         box-shadow: 0 0 2px black;
         >.abs-container{
           .abs-center();
-          padding: 5%;
+          padding: @cube-padding;
+          &.events{
+            padding:0;
+          }
         }
     }
 
@@ -54,26 +87,94 @@
       }
    }
 
-   &.dark-theme {
-
-     .cube {
+  &.dark-theme {
+      .cube figure >.abs-container.events{padding:0}
+      .event-title,
+      .event-datetime,
+      .event-text{
+        padding:@cube-padding;
+      }
+      .front, .lateral-0{
+        background: @cube-bg-f; 
+        color:@cube-color-f;
+          .event-title{
+            .makeTitle(@cube-bg-f);
+          }
+          .event-datetime{
+            .makeDateTime(@cube-bg-f);
+          }
+        }
+      .back, .lateral-2{
+        background: @cube-bg-b; 
+        color:@cube-color-b;
+          .event-title{
+            .makeTitle(@cube-bg-b);
+          }
+          .event-datetime{
+            .makeDateTime(@cube-bg-b);
+          }
+        }
+      .right, .lateral-1{
+        background: @cube-bg-r; 
+        color:@cube-color-r;
+          .event-title{
+            .makeTitle(@cube-bg-r);
+          }
+          .event-datetime{
+            .makeDateTime(@cube-bg-r);
+          }
+        }
+      .left, .lateral-3{
+        background: @cube-bg-l; 
+        color:@cube-color-l;
+          .event-title{
+            .makeTitle(@cube-bg-l);
+          }
+          .event-datetime{
+            .makeDateTime(@cube-bg-l);
+          }
+        }
         .front, .lateral-0,
         .back, .lateral-2,
         .right, .lateral-1,
-        .left, .lateral-3   {
-          background: @cube-bg-event;
-          color: @cube-text-event;
+        .left, .lateral-3 {
+          .event-title {height: @cube-title-height;}
+          .event-text {max-height: @cube-text-height;}
+          .event-title,
+          .event-text{overflow: hidden; text-align: left;}
+          .event-title{font-size:18px;font-weight: 700}
+          .event-text{font-size:14px;}
+            .event-datetime{
+              .date{
+                text-align: left; 
+                float: left;
+                div{
+                  font-size: 18px;
+                    &.highlight{
+                    font-size: 27px;
+                    font-weight: 700;  
+                    text-transform: uppercase;
+                    display: block;
+                  }
+                }                
+              }
+              .time{
+                float: right;
+                font-size: 27px;
+                text-align: right;
+                line-height: 24px;
+                margin-top: 8px;
+                span{
+                  font-size: 18px;
+                  text-transform: capitalize;
+                }
+              }
+            }
         }
-        .top    {
-          background: @cube-bg-add-event;
-          color: @cube-text-add-event;
-        }
-        .bottom {
-          background: @cube-bg;
-          color: @cube-text;
-        }
-
-      }
-
-   }
+      .top {background: @cube-bg-t; color: @cube-color-t;}
+      .bottom {background: @cube-bg-d; color: @cube-color-d;}
+    }
 }
+
+
+

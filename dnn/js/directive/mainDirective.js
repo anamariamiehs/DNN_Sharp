@@ -1,18 +1,42 @@
-// app.directive('cube', function() {
-//   return {
-//     restrict: 'AE',
-//     replace: true,
-//     template: '<section class="cube-container"><div id="cube" class="cube"><figure class="front">{{model1}}</figure><figure class="back">{{model2}}</figure><figure class="right">{{model3}}</figure><figure class="left">{{model4}}</figure><figure class="top">{{model5}}</figure><figure class="bottom">{{model6}}</figure></div></section>',
-//     link: function(scope, elem, attrs) {
-//       elem.bind('click', function() {
-//         elem.css('background-color', 'white');
-//         scope.$apply(function() {
-//           scope.color = "white";
-//         });
-//       });
-//       elem.bind('keypress', function() {
-//         elem.css('cursor', 'pointer');
-//       });
+dnnApp.directive('cubenav', ['animateCubeService', function (animateCubeService) {
+  this.id = "#cube";
+  function moveCube(keyCode){
+            // In here we have our operations on the element
+            console.log("fancy seeing you here", keyCode)
+    }
+
+    return {
+        link: function(scope, element){
+             // Bind to the window resize event for each directive instance.
+             angular.element(element).on('keyup', function(){
+                  var keyCode = animateCubeService.getKeyCode();
+                  moveCube(keyCode);
+             });
+        }
+    };
+}]);
+
+// Control keyup cube behavior
+// .show-front 
+// .show-back  
+// .show-right 
+// .show-left  
+// .show-top   
+// .show-bottom
+
+// if ($event.keyCode == 38){
+//     animateCubeService.setKeyCode($event.keyCode);
+//     console.log("up arrow")
 //     }
-//   };
-// });
+// else if ($event.keyCode == 39){
+//     animateCubeService.setKeyCode($event.keyCode);
+//     console.log("right arrow");
+// }
+// else if ($event.keyCode == 40){
+//     animateCubeService.setKeyCode($event.keyCode);
+//     console.log("down arrow");
+// }
+// else if ($event.keyCode == 37){
+//     animateCubeService.setKeyCode($event.keyCode);
+//     console.log("left arrow");
+// }
