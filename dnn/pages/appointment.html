@@ -1,7 +1,11 @@
-<div class="text-center" data-ng-controller="appointmentController as aptCtrl">
 	<section class="cube-container dark-theme">
-		<div class="cube-offset">
-			<div id="cube" class="cube show-left">
+		<div class="cube-offset"  data-ng-controller="appointmentController as aptCtrl">
+			<div id="cube" class="cube">
+
+				<!-- VIEW START -->
+
+				<!-- ADD EVENTS PAGE -->
+				
 				<figure class="top">
 					<div class="abs-container">
 						<form name="aptForm" data-ng-submit="aptCtrl.createAppointment()" class="event-form">
@@ -33,6 +37,9 @@
 						</form>
 					</div>
 				</figure>
+
+				<!-- EVENTS PAGE -->
+
 				<figure data-ng-repeat="appointment in aptCtrl.appointments | limitTo:4 track by $index" class="lateral-{{$index}}">
 					<div class="abs-container events">
 						<span class="event-title">{{ appointment.title }}</span>
@@ -51,12 +58,17 @@
 					</div>
 				</figure>
 				<figure ng-repeat="t in setCube(aptCtrl.appointments.length) track by $index" class="lateral-{{aptCtrl.appointments.length - $index}}"></figure>
+				
+				
+				<!-- STATIC PAGE -->
+				
 				<figure class="bottom">
 					<div class="abs-container">
 						<h1>Some static stuff</h1>
 					</div>
 				</figure>
+
+				<!-- VIEW END -->
 			</div>
 		</div>
 	</section>
-</div>

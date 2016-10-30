@@ -78,7 +78,7 @@ vm.loadAppointments = function() {
     var json = JSON.stringify(vm.appointments);
     localStorage.setItem('appointments', json);
   }
-
+  //TODO: Move these
   vm.clamp = function(min, max, val) {
     return Math.max(min, Math.min(val, max));
   }
