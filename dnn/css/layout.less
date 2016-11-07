@@ -5,6 +5,20 @@ body {
 i{
     font-style: initial;
 }
+
+::-webkit-input-placeholder { /* Chrome/Opera/Safari */
+  color: @input-color;
+}
+::-moz-placeholder { /* Firefox 19+ */
+  color: @input-color;
+}
+:-ms-input-placeholder { /* IE 10+ */
+  color: @input-color;
+}
+:-moz-placeholder { /* Firefox 18- */
+  color: @input-color;
+}
+
 .btn-close {
     width: 32px;
     height: 32px;
@@ -28,9 +42,13 @@ i{
         bottom:0;
     }
 }
-.form-control {
-    color:@color-primary;
-    border-color: transparent;
+.form-control  {
+    color:#FFF;
+    background: transparent;
+    .borderRadius();
+    .box-shadow(none);
+    border:none;
+    border-bottom: 2px solid @input-color;
 }
 
 .clockpicker-container {

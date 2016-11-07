@@ -8,12 +8,12 @@
         <form name="aptForm" data-ng-submit="aptCtrl.createAppointment()" class="event-form">
         <div class="form-group">
             <input type="text" name="titleInput" class="form-control  input-sm" data-ng-model="aptCtrl.appointment.title" ng-minlength="3" ng-maxlength="85" placeholder="Event name" />
-            <span class="error" ng-show="aptForm.titleInput.$touched && aptForm.titleInput.$error.minlength">Title is too short</span><br/>
-            <span class="error" ng-show="aptForm.titleInput.$error.maxlength">Title is too long</span><br/>
+            <span class="error" ng-show="aptForm.titleInput.$touched && aptForm.titleInput.$error.minlength">Title is too short</span>
+            <span class="error" ng-show="aptForm.titleInput.$error.maxlength">Title is too long</span>
         </div>
         <div class="form-group">
             <textarea class="form-control input-sm" name="textInput" data-ng-model="aptCtrl.appointment.text" ng-maxlength="255" placeholder="Event description" ></textarea>
-            <span class="error" ng-show="aptForm.textInput.$error.maxlength">Text is too long</span><br/>
+            <span class="error" ng-show="aptForm.textInput.$error.maxlength">Text is too long</span>
         </div>
         <div class="form-group">
             <div class="calendar-container">
@@ -21,7 +21,7 @@
                 <input class="form-control  input-sm" ng-model="date"/>
             </datepicker>
             </div>
-            <span class="error" ng-show="aptForm.dateInput.$pristine">You did not specify the date</span><br/>
+            <span class="error" ng-show="aptForm.dateInput.$pristine">You did not specify the date</span>
         </div>
         <!-- -->
         <div data-ng-controller="AptTimepickerController as tpCtrl">
@@ -34,3 +34,4 @@
         </form>
     </div>
 </figure>
+<figure class="bottom"></figure>
